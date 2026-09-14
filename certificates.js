@@ -78,6 +78,63 @@ const certificates = [
     image: '',
     file: 'https://drive.google.com/file/d/17cSpojtGwZS-fYJ10m84b4Ho7ACZ_z22/view?usp=drive_link',
     download: ''
+  },
+  /* ---- Ditambahkan: belum ada link akses permanen.
+     `file` sementara diisi nama file lokal apa adanya — GANTI ke link
+     akses pilihanmu (Drive/Credly/dsb.) sebelum publish. ---- */
+  {
+    title: 'Pemakalah, Seminar Nasional "Peran Perlindungan Tanaman dalam Mendukung Program Swasembada Pangan"',
+    issuer: '',
+    date: '',
+    category: 'seminar',
+    image: '',
+    file: 'https://drive.google.com/file/d/1vzRF7QIHGi7URIApjzuQPUvZtfaK4OYm/view?usp=drive_link',
+    download: ''
+  },
+  {
+    title: 'Program Intensifikasi Bahasa Asing (PIBA)',
+    issuer: '',
+    date: '',
+    category: 'training',
+    image: '',
+    file: 'sertifikat_piba.pdf',
+    download: ''
+  },
+  {
+    title: 'Pelatihan TOEFL bagi Calon Alumni',
+    issuer: '',
+    date: '',
+    category: 'training',
+    image: '',
+    file: 'https://drive.google.com/file/d/1xP52iBq_bWZsVpGe3ze5ttPG8Mmdx-pY/view?usp=drive_link',
+    download: ''
+  },
+  {
+    title: 'Praktik Kerja Lapangan (PKL)',
+    issuer: '',
+    date: '',
+    category: 'training',
+    image: '',
+    file: 'https://drive.google.com/file/d/1u6v1uodCLH4aLDg3hKNKQUc-aqIcAuaT/view?usp=drive_link',
+    download: ''
+  },
+  {
+    title: "Program Baca Tulis Al-Qur'an (BTQ)",
+    issuer: '',
+    date: '',
+    category: 'training',
+    image: '',
+    file: 'https://drive.google.com/file/d/1TXLYE_NX-31jdALc8QWPFkwjvwcmucNm/view?usp=drive_link',
+    download: ''
+  },
+  {
+    title: 'Kuliah Kerja Nyata (KKN) Reguler Angkatan Ke-74',
+    issuer: '',
+    date: '',
+    category: 'training',
+    image: '',
+    file: 'https://drive.google.com/file/d/1jRbea-q9kGOHEaMk1a8WbCoEO7QZPB2g/view?usp=drive_link',
+    download: ''
   }
 ];
 
