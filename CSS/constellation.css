@@ -1,0 +1,160 @@
+/* ======================================================
+   HOW I WORK — Professional Constellation
+   Replaces the old flat "Soft Skills" chip list inside #skills.
+   Node layout is modeled on the real Cancer constellation
+   asterism (Iota -> Asellus Borealis -> Asellus Australis ->
+   Al Tarf -> Acubens), traced as one smooth closed cycle.
+   Extends css/style.css design tokens only — no existing rule
+   in style.css is redefined or overridden here.
+   ====================================================== */
+
+.constellation-sub {
+  margin-top: 12px; margin-bottom: 36px;
+  color: var(--ivory-dim); font-size: .92rem; line-height: 1.7;
+  max-width: 620px;
+}
+
+/* ---- Canvas ---- */
+.constellation {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9.5;
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 90%, rgba(242,238,228,.3) 50%, transparent 100%),
+    radial-gradient(1px 1px at 28% 14%, rgba(242,238,228,.22) 50%, transparent 100%),
+    radial-gradient(1.4px 1.4px at 44% 88%, rgba(242,238,228,.26) 50%, transparent 100%),
+    radial-gradient(1px 1px at 58% 10%, rgba(242,238,228,.2) 50%, transparent 100%),
+    radial-gradient(1.6px 1.6px at 82% 18%, rgba(242,238,228,.28) 50%, transparent 100%),
+    radial-gradient(1px 1px at 92% 55%, rgba(242,238,228,.2) 50%, transparent 100%),
+    radial-gradient(1px 1px at 20% 45%, rgba(242,238,228,.18) 50%, transparent 100%);
+  background-repeat: no-repeat;
+}
+
+.constellation-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.constellation-lines.is-mobile { display: none; }
+
+.constellation-link, .constellation-loop {
+  fill: none; stroke-linecap: round; stroke-linejoin: round;
+  transition: stroke .45s var(--ease), stroke-width .45s var(--ease), filter .45s var(--ease);
+}
+.constellation-link {
+  stroke: rgba(124,192,152,.34); stroke-width: .38;
+}
+.constellation-loop {
+  stroke: rgba(58,160,166,.34); stroke-width: .38;
+  stroke-dasharray: .3 2.2;
+}
+.constellation-link.is-highlighted, .constellation-loop.is-highlighted {
+  stroke: var(--gold-light); stroke-width: .6;
+  filter: drop-shadow(0 0 2.5px rgba(109,196,201,.55));
+}
+.constellation.has-active .constellation-link:not(.is-highlighted),
+.constellation.has-active .constellation-loop:not(.is-highlighted) {
+  stroke-opacity: .3;
+}
+
+/* ---- Nodes ---- */
+.constellation-node {
+  position: absolute; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  background: none; border: none; cursor: pointer; padding: 10px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity .4s var(--ease);
+}
+.constellation-dot {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 4px rgba(124,192,152,.10), 0 0 14px rgba(124,192,152,.18);
+  transition: transform .45s var(--ease), background .45s var(--ease), box-shadow .45s var(--ease);
+}
+.constellation-node.is-primary .constellation-dot {
+  width: 16px; height: 16px;
+  box-shadow: 0 0 0 6px rgba(124,192,152,.12), 0 0 20px rgba(124,192,152,.22);
+}
+.constellation-label {
+  font-size: .74rem; font-weight: 600; letter-spacing: .01em;
+  color: rgba(242,238,228,.55); white-space: nowrap;
+  transition: color .4s var(--ease), opacity .4s var(--ease);
+}
+.constellation-node.is-primary .constellation-label { font-weight: 700; color: rgba(242,238,228,.72); }
+
+.constellation-node:hover .constellation-dot,
+.constellation-node:focus-visible .constellation-dot {
+  transform: scale(1.4);
+  background: var(--gold-light);
+  box-shadow: 0 0 0 8px rgba(109,196,201,.16), 0 0 22px rgba(109,196,201,.35);
+}
+.constellation-node:hover .constellation-label,
+.constellation-node:focus-visible .constellation-label { color: var(--cream); }
+.constellation-node:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; border-radius: 8px; }
+
+.constellation-node.is-active .constellation-dot {
+  transform: scale(1.55);
+  background: var(--gold-light);
+  box-shadow: 0 0 0 9px rgba(109,196,201,.2), 0 0 26px rgba(109,196,201,.4);
+}
+.constellation-node.is-active .constellation-label { color: var(--cream); }
+
+.constellation.has-active .constellation-node:not(.is-active):not(.is-related) { opacity: .4; }
+
+/* ---- Desktop node positions — traced after the Cancer asterism ----
+   0 Iota / 1 Asellus Borealis / 2 Asellus Australis (hub, ~Beehive Cluster) /
+   3-4 Al Tarf leg / 5-6 Acubens leg, closing back up to 0. */
+.constellation-node[data-i="0"] { left: 71%; top: 4%;  }
+.constellation-node[data-i="1"] { left: 64%; top: 30%; }
+.constellation-node[data-i="2"] { left: 66%; top: 52%; }
+.constellation-node[data-i="3"] { left: 34%; top: 78%; }
+.constellation-node[data-i="4"] { left: 4%;  top: 96%; }
+.constellation-node[data-i="5"] { left: 52%; top: 100%; }
+.constellation-node[data-i="6"] { left: 94%; top: 82%; }
+
+/* ---- Detail panel ---- */
+.constellation-detail {
+  margin-top: 32px;
+  border: 1px solid rgba(58,160,166,.16);
+  border-radius: var(--radius);
+  background: rgba(29,34,36,.5);
+  padding: 24px 28px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.constellation-detail-num { font-size: .7rem; letter-spacing: .16em; color: var(--gold); text-transform: uppercase; }
+.constellation-detail-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--cream); }
+.constellation-detail-title span { color: var(--ivory-dim); font-size: .95rem; font-family: 'Cabinet Grotesk', sans-serif; font-weight: 500; margin-left: 8px; }
+.constellation-detail-text { color: var(--ivory-dim); font-size: .88rem; line-height: 1.7; }
+.constellation-detail-text strong { color: rgba(242,238,228,.8); font-weight: 600; }
+
+/* Small, restrained credit line — not a decoration, just context for anyone curious */
+.constellation-caption {
+  margin-top: 10px; text-align: right;
+  font-size: .64rem; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(242,238,228,.28);
+}
+
+/* ---- Screen-reader-only fallback descriptions (always in the a11y tree) ---- */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+  .constellation { aspect-ratio: 3 / 4.4; }
+  .constellation-lines.is-desktop { display: none; }
+  .constellation-lines.is-mobile { display: block; }
+
+  .constellation-node[data-i="0"] { left: 58%; top: 4%;  }
+  .constellation-node[data-i="1"] { left: 38%; top: 20%; }
+  .constellation-node[data-i="2"] { left: 52%; top: 38%; }
+  .constellation-node[data-i="3"] { left: 18%; top: 56%; }
+  .constellation-node[data-i="4"] { left: 10%; top: 76%; }
+  .constellation-node[data-i="5"] { left: 42%; top: 90%; }
+  .constellation-node[data-i="6"] { left: 82%; top: 70%; }
+
+  .constellation-label { font-size: .68rem; }
+  .constellation-detail { padding: 20px; }
+}
+@media (max-width: 400px) {
+  .constellation-node { padding: 14px; } /* keep tap target comfortable without moving the dot's visual center */
+}
