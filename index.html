@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Security Headers (meta equivalents; real headers should be set server-side) -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+  <meta name="robots" content="index, follow">
+  <title>Muhammad Rezki Nur — Biologist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cabinet+Grotesk:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+
+
+<!-- ====== EXPLORE MY JOURNEY — HOLOGRAPHIC MODAL ====== -->
+<div id="journey-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="jm-title">
+  <div class="jm-backdrop" onclick="closeJourneyModal()"></div>
+  <div class="jm-panel">
+    <button class="jm-close" onclick="closeJourneyModal()" aria-label="Tutup Journey"><i class="fas fa-times"></i></button>
+
+    <div class="jm-header">
+      <span class="jm-eyebrow">The Journey</span>
+      <h2 id="jm-title" class="jm-title">Explore My Journey</h2>
+      <p class="jm-sub">Education &middot; Experience &middot; Growth</p>
+    </div>
+
+    <div class="jm-map">
+      <div class="jm-trunk" aria-hidden="true"></div>
+
+      <button class="jm-major" onclick="showJourneyDetail('foundation')">
+        <span class="jm-major-dot"></span>
+        <span class="jm-major-label">Foundation</span>
+        <span class="jm-major-name">Madrasah Madani Alauddin Pao-Pao</span>
+      </button>
+
+      <button class="jm-major" onclick="showJourneyDetail('experience')">
+        <span class="jm-major-dot"></span>
+        <span class="jm-major-label">Experience</span>
+        <span class="jm-major-name">PMI</span>
+      </button>
+
+      <button class="jm-major" onclick="showJourneyDetail('education')">
+        <span class="jm-major-dot"></span>
+        <span class="jm-major-label">Higher Education</span>
+        <span class="jm-major-name">UIN Alauddin Makassar</span>
+      </button>
+
+      <div class="jm-branch">
+        <button class="jm-secondary" onclick="showJourneyDetail('research')"><span class="jm-secondary-dot"></span> Research</button>
+        <button class="jm-secondary" onclick="showJourneyDetail('lab')"><span class="jm-secondary-dot"></span> Laboratory</button>
+      </div>
+
+      <button class="jm-major jm-major-now" onclick="showJourneyDetail('now')">
+        <span class="jm-major-dot"></span>
+        <span class="jm-major-label">Now</span>
+        <span class="jm-major-name">Helping Family Business</span>
+      </button>
+
+      <div class="jm-branch jm-branch-now">
+        <button class="jm-secondary" onclick="showJourneyDetail('data')"><span class="jm-secondary-dot"></span> Data</button>
+        <button class="jm-secondary" onclick="showJourneyDetail('biology')"><span class="jm-secondary-dot"></span> Biology</button>
+        <button class="jm-secondary" onclick="showJourneyDetail('web')"><span class="jm-secondary-dot"></span> Web Development</button>
+        <button class="jm-secondary" onclick="showJourneyDetail('selfdev')"><span class="jm-secondary-dot"></span> Self Development</button>
+      </div>
+
+      <p class="jm-continues">The Journey Continues &hellip;</p>
+    </div>
+
+    <div class="jm-detail" id="jm-detail" hidden>
+      <button class="jm-detail-close" onclick="closeJourneyDetail()" aria-label="Tutup detail"><i class="fas fa-times"></i></button>
+      <span class="jm-detail-label" id="jm-detail-label"></span>
+      <div class="jm-detail-title" id="jm-detail-title"></div>
+      <div class="jm-detail-desc" id="jm-detail-desc"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== AREAS OF INTEREST — HOLOGRAPHIC PROFILE MODULE ====== -->
+<div id="areas-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="aoi-title">
+  <div class="aoi-backdrop" onclick="closeAreasModal()"></div>
+  <div class="aoi-panel">
+    <div class="aoi-scanline" aria-hidden="true"></div>
+    <button class="aoi-close" onclick="closeAreasModal()" aria-label="Tutup Areas of Interest"><i class="fas fa-times"></i></button>
+
+    <div class="aoi-header">
+      <span class="aoi-eyebrow">Professional Direction</span>
+      <h2 id="aoi-title" class="aoi-title">Areas of Interest</h2>
+    </div>
+
+    <div class="aoi-columns">
+      <div class="aoi-col">
+        <h3 class="aoi-col-title">Fields</h3>
+        <ul class="aoi-list">
+          <li><span class="aoi-bullet">&#9671;</span> Data &amp; Analytics</li>
+          <li><span class="aoi-bullet">&#9671;</span> Biology / Life Science</li>
+          <li><span class="aoi-bullet">&#9671;</span> Scientific Research</li>
+        </ul>
+      </div>
+      <div class="aoi-col">
+        <h3 class="aoi-col-title">Roles</h3>
+        <ul class="aoi-list">
+          <li><span class="aoi-bullet aoi-bullet-alt">&#9672;</span> Data Entry</li>
+          <li><span class="aoi-bullet aoi-bullet-alt">&#9672;</span> Laboratory Assistant</li>
+          <li><span class="aoi-bullet aoi-bullet-alt">&#9672;</span> Biological Analyst</li>
+          <li><span class="aoi-bullet aoi-bullet-alt">&#9672;</span> Quality Control (QC)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== HEADER ====== -->
+<header id="header">
+  <nav>
+    <a href="#hero" class="nav-logo">Rezki<em>.</em></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="CV_Muhammad_Rezki.pdf" download class="nav-cta">Download CV</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#skills" class="mobile-link">Skills</a>
+  <a href="#certificates" class="mobile-link">Certificates</a>
+  <a href="#portfolio" class="mobile-link">Portfolio</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="CV_Muhammad_Rezki.pdf" download class="mobile-link mobile-cv">Download CV</a>
+</div>
+
+<!-- ====== HERO ====== -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Portofolio Profesional</span>
+    </div>
+    <h1 class="hero-h1">Muhammad<br>Rezki <em>Nur</em></h1>
+    <p class="hero-role">Biology + Observasi + Konsisten =</p>
+    <p class="hero-sub">
+      Seorang Biologist yang terbiasa berpikir logis bekerja sistematis, gemar mengamati dan menganalisis serta konsisten dalam menjalani proses.
+    </p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-solid">
+        <i class="fas fa-briefcase"></i> Body of Work
+      </a>
+      <div class="hero-cv-wrap">
+        <a href="CV_Muhammad_Rezki.pdf" download="CV_Muhammad_Rezki_Nur.pdf" class="btn-ghost">
+          <i class="fas fa-download"></i> CV Universal
+        </a>
+        <button type="button" class="job-status-dot" aria-label="Status ketersediaan kerja" aria-describedby="jobStatusTip" onclick="toggleJobStatusTip(event)">
+          <span class="job-status-dot-inner" aria-hidden="true"></span>
+        </button>
+        <span id="jobStatusTip" class="job-status-tip" role="status">Membutuhkan pekerjaan</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Bulan pengalaman</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-project-count">2+</div>
+        <div class="stat-label">Proyek selesai</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">S.Si</div>
+        <div class="stat-label">Lulusan biologi</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-media">
+      <div class="hero-frame-mark tl" aria-hidden="true"></div>
+      <div class="hero-frame-mark tr" aria-hidden="true"></div>
+      <span class="hero-micro-label" aria-hidden="true">Portofolio Profesional</span>
+      <div class="hero-photo-container">
+        <img src="assets/profile/Formal.png" alt="Muhammad Rezki Nur" class="hero-photo"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="hero-photo-placeholder" style="display:none;">
+          <i class="fas fa-user"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ABOUT ====== -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="about-grid reveal">
+      <div>
+        <div class="about-media">
+          <div class="about-frame-mark tl" aria-hidden="true"></div>
+          <div class="about-frame-mark tr" aria-hidden="true"></div>
+          <div class="about-frame-mark bl" aria-hidden="true"></div>
+          <div class="about-frame-mark br" aria-hidden="true"></div>
+          <div class="about-img-frame">
+            <img src="assets/profile/profile-s1.png" alt="Muhammad Rezki Nur" loading="lazy" id="aboutProfilePhoto"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="about-img-placeholder" style="display:none;"><i class="fas fa-user"></i></div>
+          </div>
+          <div class="about-photo-switch-bar">
+            <button type="button" class="about-photo-switch" id="aboutPhotoSwitchBtn" aria-label="Ganti foto profil — saat ini foto 1 / 4">
+              <i class="fas fa-camera-retro" aria-hidden="true"></i>
+              <span class="switch-text">
+                <strong>Ganti Foto</strong>
+                <small id="aboutPhotoSwitchCount">1 / 4</small>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-tag"><span>Tentang Saya</span></div>
+        <h2 class="section-h2">Praktisi ilmu<br>& <em>Biology</em></h2>
+        <blockquote class="about-quote">
+          &ldquo;Pedang yang belum ditarik tidak berarti tumpul, ia sedang menuggu waktu yang tepat.&rdquo;
+        </blockquote>
+        <div class="about-body">
+          <p> Lulusan Biologi fakultas sains dan teknologi dengan IPK 3.43 di Universitas Islam Negeri Makassar. Selama perkulihaan saya belajar praktikum, analisis, bekerja teratur, mengikuti prosedur, menyusun laporan dan belajar bertanggung jawab setiap pekerjaan. Prinsip yang diperoleh yaitu setiap proses harus dikerjakan, setiap hasil harus di pastikan.</p>
+          <p> Saya memiliki beberapa pengalaman yaitu magang selama 1 bulan 2x, Pkl selama tiga bulan dan menjadi helper penelitian 4 kali. detailnya silahkan di interview!.</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-trio reveal">
+      <button type="button" class="trio-box" onclick="openAreasModal()">
+        <span class="trio-icon" aria-hidden="true"><i class="fas fa-compass"></i></span>
+        <span class="trio-label">Area of Interest</span>
+        <span class="trio-sub">Jelajahi arah profesional saya <i class="fas fa-arrow-right"></i></span>
+      </button>
+      <button type="button" class="trio-box" onclick="openJourneyModal()">
+        <span class="trio-icon" aria-hidden="true"><i class="fas fa-route"></i></span>
+        <span class="trio-label">My Journey</span>
+        <span class="trio-sub">Lihat perjalanan lengkap saya <i class="fas fa-arrow-right"></i></span>
+      </button>
+      <a href="#certificates" class="trio-box">
+        <span class="trio-icon" aria-hidden="true"><i class="fas fa-award"></i></span>
+        <span class="trio-label">Certificate</span>
+        <span class="trio-sub">Lihat arsip sertifikat &amp; pelatihan <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====== SKILLS ====== -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-tag"><span>Keahlian Saya</span></div>
+      <h2 class="section-h2">Skills &amp;<br><em>Kompetensi</em></h2>
+      <p class="skills-sub">Setiap keahlian di bawah ini teruji langsung lewat studi laboratorium, sertifikasi, dan proyek nyata yang telah saya kerjakan, bukan sekadar angka.</p>
+    </div>
+
+    <div class="reveal" id="skillsGrid">
+
+      <!-- Hard Skills Utama -->
+      <div class="skill-section-label" style="margin-top:56px;">
+        <div class="skill-section-label-line"></div>
+        <div class="skill-section-label-text"><i class="fas fa-flask"></i> &nbsp;Core Skills</div>
+        <div class="skill-section-label-line"></div>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-item">
+          <div class="skill-item-header">
+            <div class="skill-item-icon"><i class="fas fa-microscope"></i></div>
+            <div>
+              <div class="skill-item-name">Laboratory Analysis</div>
+              <div class="skill-item-sub">Analisis Laboratorium</div>
+            </div>
+          </div>
+          <button class="depth-track" onclick="toggleDepthDetail(this)" aria-expanded="false" aria-label="Lihat detail depth Laboratory Analysis">
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Foundation</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Application</span></div>
+          </button>
+          <div class="depth-detail"><i class="fas fa-check-circle"></i> Terbentuk dari &plusmn;5 bulan praktik langsung di laboratorium.</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-item-header">
+            <div class="skill-item-icon"><i class="fas fa-vials"></i></div>
+            <div>
+              <div class="skill-item-name">Microbiology Lab Techniques</div>
+              <div class="skill-item-sub">Teknik Laboratorium Mikrobiologi</div>
+            </div>
+          </div>
+          <button class="depth-track" onclick="toggleDepthDetail(this)" aria-expanded="false" aria-label="Lihat detail depth Microbiology Lab Techniques">
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Foundation</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Learning</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Application</span></div>
+          </button>
+          <div class="depth-detail"><i class="fas fa-check-circle"></i> Didapat selama 5 tahun menempuh kurikulum Biologi di UIN Makassar.</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-item-header">
+            <div class="skill-item-icon"><i class="fas fa-leaf"></i></div>
+            <div>
+              <div class="skill-item-name">Biological Identification</div>
+              <div class="skill-item-sub">Dasar-Dasar Identifikasi Biologis</div>
+            </div>
+          </div>
+          <button class="depth-track" onclick="toggleDepthDetail(this)" aria-expanded="false" aria-label="Lihat detail depth Biological Identification">
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Foundation</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Application</span></div>
+          </button>
+          <div class="depth-detail"><i class="fas fa-check-circle"></i> Jadi bagian rutin studi Biologi, dilatih berulang sepanjang masa kuliah.</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-item-header">
+            <div class="skill-item-icon"><i class="fas fa-water"></i></div>
+            <div>
+              <div class="skill-item-name">Environmental Sampling</div>
+              <div class="skill-item-sub">Pengambilan Sampel Lingkungan</div>
+            </div>
+          </div>
+          <button class="depth-track" onclick="toggleDepthDetail(this)" aria-expanded="false" aria-label="Lihat detail depth Environmental Sampling">
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Foundation</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Application</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Building</span></div>
+          </button>
+          <div class="depth-detail"><i class="fas fa-check-circle"></i> Terpakai nyata saat riset infestasi serangga yang kemudian dipresentasikan di seminar nasional.</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-item-header">
+            <div class="skill-item-icon"><i class="fas fa-file-alt"></i></div>
+            <div>
+              <div class="skill-item-name">Laboratory Documentation</div>
+              <div class="skill-item-sub">Dokumentasi Laboratorium</div>
+            </div>
+          </div>
+          <button class="depth-track" onclick="toggleDepthDetail(this)" aria-expanded="false" aria-label="Lihat detail depth Laboratory Documentation">
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Foundation</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Application</span></div>
+          </button>
+          <div class="depth-detail"><i class="fas fa-check-circle"></i> Terlatih lewat kebiasaan menulis laporan ilmiah selama studi laboratorium.</div>
+          <div class="skill-tools">
+            <span class="skill-tool-icon" title="Microsoft Word" role="img" aria-label="Microsoft Word"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#2B579A" d="M21.17 3.25Q21.5 3.25 21.76 3.5 22 3.74 22 4.08V19.92Q22 20.26 21.76 20.5 21.5 20.75 21.17 20.75H7.83Q7.5 20.75 7.24 20.5 7 20.26 7 19.92V17H2.83Q2.5 17 2.24 16.76 2 16.5 2 16.17V7.83Q2 7.5 2.24 7.24 2.5 7 2.83 7H7V4.08Q7 3.74 7.24 3.5 7.5 3.25 7.83 3.25M7.03 11.34L8.23 15.28H9.6L10.91 8.72H9.53L8.75 12.6L7.64 8.85H6.5L5.31 12.62L4.53 8.72H3.09L4.4 15.28H5.77M20.75 19.5V17H8.25V19.5M20.75 15.75V12.63H12V15.75M20.75 11.38V8.25H12V11.38M20.75 7V4.5H8.25V7Z"/></svg></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-item-header">
+            <div class="skill-item-icon"><i class="fas fa-clipboard-check"></i></div>
+            <div>
+              <div class="skill-item-name">Data Collection & Verification</div>
+              <div class="skill-item-sub">Pengumpulan & Verifikasi Data</div>
+            </div>
+          </div>
+          <button class="depth-track" onclick="toggleDepthDetail(this)" aria-expanded="false" aria-label="Lihat detail depth Data Collection & Verification">
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Foundation</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Application</span></div>
+          </button>
+          <div class="depth-detail"><i class="fas fa-check-circle"></i> Terasah saat mengambil dan memverifikasi data uji kualitas air selama magang laboratorium.</div>
+          <div class="skill-tools">
+            <span class="skill-tool-icon" title="Microsoft Excel" role="img" aria-label="Microsoft Excel"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#217346" d="M21.17 3.25Q21.5 3.25 21.76 3.5 22 3.74 22 4.08V19.92Q22 20.26 21.76 20.5 21.5 20.75 21.17 20.75H7.83Q7.5 20.75 7.24 20.5 7 20.26 7 19.92V17H2.83Q2.5 17 2.24 16.76 2 16.5 2 16.17V7.83Q2 7.5 2.24 7.24 2.5 7 2.83 7H7V4.08Q7 3.74 7.24 3.5 7.5 3.25 7.83 3.25M7 13.06L8.18 15.28H9.97L8 12.06L9.93 8.89H8.22L7.13 10.9L7.09 10.96L7.06 11.03Q6.8 10.5 6.5 9.96 6.25 9.43 5.97 8.89H4.16L6.05 12.08L4 15.28H5.78M13.88 19.5V17H8.25V19.5M13.88 15.75V12.63H12V15.75M13.88 11.38V8.25H12V11.38M13.88 7V4.5H8.25V7M20.75 19.5V17H15.13V19.5M20.75 15.75V12.63H15.13V15.75M20.75 11.38V8.25H15.13V11.38M20.75 7V4.5H15.13V7Z"/></svg></span>
+            <span class="skill-tool-icon" title="Google Drive" role="img" aria-label="Google Drive"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574zm-4.76 1.73a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214zm2.259 12.653-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167h-7.249z"/></svg></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-item-header">
+            <div class="skill-item-icon"><i class="fas fa-chart-line"></i></div>
+            <div>
+              <div class="skill-item-name">Data Processing & Reporting</div>
+              <div class="skill-item-sub">Pengolahan & Pelaporan Data</div>
+            </div>
+          </div>
+          <button class="depth-track" onclick="toggleDepthDetail(this)" aria-expanded="false" aria-label="Lihat detail depth Data Processing & Reporting">
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Foundation</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Application</span></div>
+          </button>
+          <div class="depth-detail"><i class="fas fa-check-circle"></i> Dipakai untuk mengolah hasil uji laboratorium jadi laporan yang tersusun rapi.</div>
+          <div class="skill-tools">
+            <span class="skill-tool-icon" title="Microsoft Excel" role="img" aria-label="Microsoft Excel"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#217346" d="M21.17 3.25Q21.5 3.25 21.76 3.5 22 3.74 22 4.08V19.92Q22 20.26 21.76 20.5 21.5 20.75 21.17 20.75H7.83Q7.5 20.75 7.24 20.5 7 20.26 7 19.92V17H2.83Q2.5 17 2.24 16.76 2 16.5 2 16.17V7.83Q2 7.5 2.24 7.24 2.5 7 2.83 7H7V4.08Q7 3.74 7.24 3.5 7.5 3.25 7.83 3.25M7 13.06L8.18 15.28H9.97L8 12.06L9.93 8.89H8.22L7.13 10.9L7.09 10.96L7.06 11.03Q6.8 10.5 6.5 9.96 6.25 9.43 5.97 8.89H4.16L6.05 12.08L4 15.28H5.78M13.88 19.5V17H8.25V19.5M13.88 15.75V12.63H12V15.75M13.88 11.38V8.25H12V11.38M13.88 7V4.5H8.25V7M20.75 19.5V17H15.13V19.5M20.75 15.75V12.63H15.13V15.75M20.75 11.38V8.25H15.13V11.38M20.75 7V4.5H15.13V7Z"/></svg></span>
+            <span class="skill-tool-icon" title="Microsoft Word" role="img" aria-label="Microsoft Word"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#2B579A" d="M21.17 3.25Q21.5 3.25 21.76 3.5 22 3.74 22 4.08V19.92Q22 20.26 21.76 20.5 21.5 20.75 21.17 20.75H7.83Q7.5 20.75 7.24 20.5 7 20.26 7 19.92V17H2.83Q2.5 17 2.24 16.76 2 16.5 2 16.17V7.83Q2 7.5 2.24 7.24 2.5 7 2.83 7H7V4.08Q7 3.74 7.24 3.5 7.5 3.25 7.83 3.25M7.03 11.34L8.23 15.28H9.6L10.91 8.72H9.53L8.75 12.6L7.64 8.85H6.5L5.31 12.62L4.53 8.72H3.09L4.4 15.28H5.77M20.75 19.5V17H8.25V19.5M20.75 15.75V12.63H12V15.75M20.75 11.38V8.25H12V11.38M20.75 7V4.5H8.25V7Z"/></svg></span>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-item-header">
+            <div class="skill-item-icon"><i class="fas fa-box-archive"></i></div>
+            <div>
+              <div class="skill-item-name">Digital Documentation & Archiving</div>
+              <div class="skill-item-sub">Dokumentasi & Pengarsipan Digital</div>
+            </div>
+          </div>
+          <button class="depth-track" onclick="toggleDepthDetail(this)" aria-expanded="false" aria-label="Lihat detail depth Digital Documentation & Archiving">
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Foundation</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Application</span></div>
+          </button>
+          <div class="depth-detail"><i class="fas fa-check-circle"></i> Jadi kebiasaan kerja saat mengarsipkan dokumen digital untuk proyek studio.</div>
+          <div class="skill-tools">
+            <span class="skill-tool-icon" title="Google Drive" role="img" aria-label="Google Drive"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574zm-4.76 1.73a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214zm2.259 12.653-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167h-7.249z"/></svg></span>
+            <span class="skill-tool-icon" title="MEGA" role="img" aria-label="MEGA"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="#D9272E" d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm6.23 16.244a.371.371 0 0 1-.373.372H16.29a.371.371 0 0 1-.372-.372v-4.828c0-.04-.046-.06-.08-.033l-3.32 3.32a.742.742 0 0 1-1.043 0l-3.32-3.32c-.027-.027-.08-.007-.08.033v4.828a.371.371 0 0 1-.372.372H6.136a.371.371 0 0 1-.372-.372V7.757c0-.206.166-.372.372-.372h1.076a.75.75 0 0 1 .525.22l4.13 4.13a.18.18 0 0 0 .26 0l4.13-4.13c.14-.14.325-.22.525-.22h1.075c.206 0 .372.166.372.372z"/></svg></span>
+          </div>
+        </div>
+
+      </div><!-- end skills-grid: core -->
+
+      <div class="skill-section-label" style="margin-top:56px;">
+        <div class="skill-section-label-line"></div>
+        <div class="skill-section-label-text"><i class="fas fa-layer-group"></i> &nbsp;Supporting Skills</div>
+        <div class="skill-section-label-line"></div>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-item">
+          <div class="skill-item-header">
+            <div class="skill-item-icon"><i class="fas fa-laptop-code"></i></div>
+            <div>
+              <div class="skill-item-name">Microsoft Office</div>
+              <div class="skill-item-sub">Word, Excel & PowerPoint</div>
+            </div>
+          </div>
+          <button class="depth-track" onclick="toggleDepthDetail(this)" aria-expanded="false" aria-label="Lihat detail depth Microsoft Office">
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Foundation</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Application</span></div>
+          </button>
+          <div class="depth-detail"><i class="fas fa-check-circle"></i> Didukung sertifikasi Microsoft Excel.</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-item-header">
+            <div class="skill-item-icon"><i class="fas fa-robot"></i></div>
+            <div>
+              <div class="skill-item-name">AI Assisted Workflow</div>
+              <div class="skill-item-sub">Alur Kerja Berbasis AI</div>
+            </div>
+          </div>
+          <button class="depth-track" onclick="toggleDepthDetail(this)" aria-expanded="false" aria-label="Lihat detail depth AI Assisted Workflow">
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Foundation</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Exploration</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Application</span></div>
+            <span class="depth-connector"></span>
+            <div class="depth-stage"><span class="depth-node"></span><span class="depth-label">Building</span></div>
+          </button>
+          <div class="depth-detail"><i class="fas fa-check-circle"></i> Langsung dipraktikkan saat membangun situs ini dan beberapa proyek digital lain.</div>
+        </div>
+
+
+      </div><!-- end skills-grid -->
+
+      <!-- How I Work — Professional Constellation (formerly a flat Soft Skills chip list) -->
+      <div class="skill-section-label" style="margin-top:48px;">
+        <div class="skill-section-label-line"></div>
+        <div class="skill-section-label-text"><i class="fas fa-star"></i> &nbsp;How I Work</div>
+        <div class="skill-section-label-line"></div>
+      </div>
+      <p class="constellation-sub">Tujuh soft skill yang menjadi cara kerja yang saling terhubung dan membentuk satu siklus yang terus berjalan. Bukan daftar terpisah, melainkan pola yang sama yang saya ulang setiap kali menghadapi hal baru.</p>
+
+      <div class="constellation" id="constellationCanvas">
+        <svg class="constellation-lines is-desktop" id="constellationLinesDesktop" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <svg class="constellation-lines is-mobile" id="constellationLinesMobile" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div id="constellationNodes"></div>
+      </div>
+
+      <div class="constellation-detail" id="constellationDetail" aria-live="polite"></div>
+      <p class="constellation-caption">Constellation shaped after Cancer</p>
+
+      <!-- Always available to assistive tech, independent of click/hover interaction -->
+      <div class="sr-only" id="constellationDesc"></div>
+
+    </div>
+  </div>
+<!-- ====== CERTIFICATE ARCHIVE ====== -->
+<section id="certificates" class="certs-hero">
+  <div class="section-wrap reveal">
+    <div class="section-tag"><span>Credentials</span></div>
+    <h1 class="section-h2 certs-h1">Certificate <em>Archive</em></h1>
+    <p class="certs-intro">Kumpulan sertifikat dan pelatihan yang sudah saya selesaikan sejauh ini.</p>
+  </div>
+<section class="certs-collection">
+  <div class="section-wrap">
+    <div id="certsGrid">
+      <p class="certs-empty" id="certsEmpty" hidden>Belum ada sertifikat yang ditambahkan.</p>
+    </div>
+  </div>
+
+<!-- ====== PORTFOLIO ====== -->
+<section id="portfolio">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-tag"><span>Karya Terbaik</span></div>
+      <h2 class="section-h2">Portfolio <em>Proyek</em></h2>
+      <p class="portfolio-intro">Beberapa proyek yang telah saya kerjakan untuk pengembangan pribadi dan akademik.</p>
+      <div class="skill-section-label" style="margin-top:22px;max-width:340px;">
+        <span class="skill-section-label-text">09 Entri Terpilih</span>
+        <div class="skill-section-label-line"></div>
+      </div>
+    </div>
+    <div class="portfolio-grid reveal">
+
+      <!-- Card 1: Biology Research -->
+      <div class="p-card">
+        <div class="p-card-thumb">
+          <img src="assets/proyek/Gambar Artikel Sains.png" alt="Thumbnail proyek Artikel Sains" width="600" height="220">
+          <div class="p-card-overlay">
+            <div class="overlay-btns">
+              <a href="artikel-sains.pdf" target="_blank" class="overlay-btn" title="Buka Proyek"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="p-card-body">
+          <div class="p-card-tags">
+            <span class="p-tag">Biology</span>
+            <span class="p-tag">Research</span>
+            <span class="p-tag">Scientific Paper</span>
+          </div>
+          <div class="p-card-title">Artikel Sains</div>
+          <div class="p-card-desc">Riset infestasi serangga lalat yang dipresentasikan di prosiding seminar nasional Perhimpunan Entomologi Indonesia, sebagai kontribusi kecil untuk mendukung swasembada pangan Indonesia.</div>
+          <a href="artikel-sains.pdf" target="_blank" class="p-card-link"><i class="fas fa-external-link-alt"></i> Buka Proyek</a>
+        </div>
+      </div>
+
+      <!-- Card 2: Portfolio Website -->
+      <div class="p-card">
+        <div class="p-card-thumb">
+          <img src="assets/proyek/Gambar Website Portfolio.png" alt="Thumbnail proyek Website Portfolio" width="600" height="220">
+          <div class="p-card-overlay">
+            <div class="overlay-btns">
+              <a href="portfolio.html" target="_blank" class="overlay-btn" title="Buka Proyek"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="p-card-body">
+          <div class="p-card-tags">
+            <span class="p-tag">Creativity</span>
+            <span class="p-tag">Dasar2 web dev</span>
+            <span class="p-tag">AI workflow</span>
+          </div>
+          <div class="p-card-title">Website Portfolio</div>
+          <div class="p-card-desc">Portofolio digital yang saya rancang dan bangun dengan bantuan AI, mulai dari struktur sampai detail visual, untuk menampilkan keahlian dan proyek yang sudah saya kerjakan.</div>
+          <a href="portfolio.html" target="_blank" class="p-card-link"><i class="fas fa-arrow-right"></i> Buka Proyek</a>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTACT ====== -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-tag"><span>Kontak</span></div>
+      <h2 class="section-h2">Mari Mulai Sebuah<br><em>Percakapan</em></h2>
+    </div>
+    <div class="contact-grid reveal">
+      <div>
+        <span class="channel-status"><span class="channel-status-dot"></span>Terbuka</span>
+        <p class="contact-intro">Sudah selesai menjelajahi portofolio ini? Saya terbuka untuk peluang kerja, dan kalau Anda masih ragu, saya senang diajak wawancara atau tes lebih dulu.</p>
+        <div class="contact-details">
+          <div class="c-item">
+            <div class="c-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div class="c-label">Email</div>
+              <div class="c-val"><a href="mailto:mrezkinur@email.com">mrezkinur@email.com</a></div>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <div class="c-label">Telepon</div>
+              <div class="c-val"><a href="tel:+6285157255520">+62 157 255 520</a></div>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <div class="c-label">Lokasi</div>
+              <div class="c-val">Makassar, Indonesia</div>
+            </div>
+          </div>
+        </div>
+        <div class="socials">
+          <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/muhammad-rezki-nur1" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/m.rezki_119" target="_blank" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="f-row">
+          <div class="f-group">
+            <label class="f-label">Nama Lengkap</label>
+            <input type="text" id="contact-name" class="f-input" placeholder="Nama Anda" maxlength="80" autocomplete="name">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Email</label>
+            <input type="email" id="contact-email" class="f-input" placeholder="email@anda.com" maxlength="254" autocomplete="email">
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">Subjek</label>
+          <input type="text" id="contact-subject" class="f-input" placeholder="Topik pesan Anda" maxlength="150">
+        </div>
+        <div class="f-group">
+          <label class="f-label">Pesan</label>
+          <textarea id="contact-message" class="f-textarea" rows="5" placeholder="Ceritakan proyek atau pertanyaan Anda..." maxlength="2000"></textarea>
+        </div>
+        <div class="f-status" id="form-status"></div>
+        <button class="btn-submit" id="btn-send" onclick="handleSend(this)">
+          <i class="fas fa-paper-plane"></i> Kirim Pesan
+        </button>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <p>© 2026 <span>Muhammad Rezki Nur</span>. Designed &amp; Developed with Purpose.</p>
+  <a href="#hero" class="footer-back"><i class="fas fa-arrow-up"></i> Kembali ke Atas</a>
+</footer>
+
+<!-- ====== SCRIPTS ====== -->
+<script src="JS/script.js" defer></script>
+
+
+
+</body>
+</html>
